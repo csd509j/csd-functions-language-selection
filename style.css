@@ -1,0 +1,195 @@
+.calendar-dropdown {
+	position: relative;
+	display: inline-block;
+	margin-right: 5px;
+}
+.calendar-dropdown .dropdown-menu {
+	margin-top: 0;
+	border-radius: 0;
+	padding: 5px 15px;
+	min-width: 250px;
+}
+.calendar-dropdown .dropdown-menu > li > a:hover, .calendar-dropdown .dropdown-menu > li > a:focus {
+	background-color: transparent;
+}
+.calendar-dropdown .dropdown-menu > li {
+	padding: 3px 0;
+}
+.calendar-dropdown .dropdown-menu > li.divider {
+	padding: 0;
+}
+.calendar-dropdown .dropdown-header {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.calendar-dropdown input[type="checkbox"] {
+	position: absolute;
+	right: 9000px;
+}
+.calendar-dropdown .checkbox {
+	margin: 0;
+}
+.calendar-dropdown label {
+	margin: 0;
+}
+.calendar-dropdown .dropdown-menu > li > a {
+	padding: 0;
+}
+.calendar-dropdown input[type="checkbox"] + .label-text:before{
+	content: "\f096";
+	font-family: "FontAwesome";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing:antialiased;
+	width: 1em;
+	display: inline-block;
+	margin-right: 5px;
+}
+.calendar-dropdown input[type="checkbox"]:checked + .label-text:before{
+	content: "\f14a";
+	color: #2980b9;
+	animation: effect 250ms ease-in;
+}
+.calendar-dropdown input[type="checkbox"]:disabled + .label-text{
+	color: #aaa;
+}
+.calendar-dropdown input[type="checkbox"]:disabled + .label-text:before{
+	content: "\f0c8";
+	color: #ccc;
+}
+.calendar-dropdown .label-color {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+}
+.fc-list-item-title a[href]:hover{
+	text-decoration: none;
+}
+#calendar {
+	width: 100%;
+}
+#calendar .fc-view-container {
+	background-color: white;
+}
+#calendar.fc th {
+	background-color: #666;
+    color: #fff;
+    font-weight: 700;
+    padding: 1em 0;
+    white-space: nowrap;
+    border-left: 1px solid #666;
+    border-right: 1px solid #666;
+    font-size: 12px;
+}
+#calendar.fc .fc-row .fc-content-skeleton .fc-day-top {
+	background-color: #f7f7f7;
+    color: #707070;
+    padding: 4px 9px 6px;
+    line-height: 1.2;
+    font-size: 12px;
+    font-weight: 700;
+}
+#calendar.fc .fc-row .fc-content-skeleton .fc-day-top.fc-today {
+	background-color: #555;
+	color: white;
+}
+#calendar tr:first-child>td>.fc-day-grid-event {
+	margin-top: 5px;
+}
+.fc button, .fc table, body .fc {
+	font-size: 14px;
+}
+.fc-day-grid-event {
+	padding: 1px 10px;
+}
+#calendar td:not([colspan]) .fc-day-grid-event {
+	background-color: #ffffff !important;
+	border-color: #ffffff !important;
+}
+#calendar td[colspan]:not([colspan="1"]) .fc-day-grid-event {
+	color: white !important;	
+	background-color: #999999 !important;
+}
+#calendar.fc-unthemed td.fc-today {
+	background-color: #ffffff;
+}
+.page-template-page-calendar .popover .popover-content {
+	font-size: 12px !important;
+	line-height: 20px;
+}
+#calendar .fc-state-active, #calendar .fc-state-default, #calendar-list .fc-state-active, #calendar-list .fc-state-default  {
+	box-shadow: none;
+	text-shadow: none;
+	border-color: #ccc;
+	background-image: none;
+}
+#calendar .fc-right {
+	width: 13%;
+}
+#calendar .fc-right .fc-button-group {
+	width: 100%;
+	text-align: right;
+}
+#calendar.fc .fc-right .fc-button-group>* {
+	float: none;
+}
+
+/* Calendar List View */
+#calendar-list h2 {
+	font-size: 18px;
+	margin-top: 5px;
+}
+#calendar-list .fc-toolbar {
+	display: none;
+}
+#calendar-list .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-popover .fc-header {
+	background-color: #ddd;
+}
+/*
+#calendar-list .fc-list-heading {
+	display: none;
+}
+*/
+#calendar-list .fc-view-container {
+	background-color: white;
+}
+#calendar-list .fc-list-view {
+	border: none;
+}
+#calendar-list .fc-scroller {
+	height: auto !important;
+}
+#calendar-list.fc-ltr .fc-list-item-marker {
+	display: none;
+}
+#calendar-list [class^="fc-list-"]nth-of-type(1n+13){ 
+	display: none;
+}
+
+/* Calendar List View District */
+#calendar-list-district .fc-toolbar.fc-header-toolbar, #calendar-list-district.fc-ltr .fc-list-item-marker {
+	display: none;
+}
+#calendar-list-district .fc-scroller {
+	height: auto !important;
+}
+#calendar-list-district .fc-list-table td, #calendar-list-district .fc-list-view {
+	border-width: 0;
+}
+#calendar-list-district.fc-ltr .fc-list-heading-main {
+	font-size: 12px;
+	text-transform: uppercase;
+}
+#calendar-list-district.fc-unthemed .fc-list-item:hover td {
+	background-color: white;
+}
+#calendar-list-district .fc-list-table  tr {
+	display: none;
+}
+#calendar-list-district .fc-list-table tr:nth-child(-n+8){
+    display: table-row;
+}
