@@ -23,70 +23,129 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since CSD Schools 1.4.5
  */
-function languages_toggle(){
+function languages_toggle() {
 	global $wp;
 	$current_url = home_url('/');
 	$url = $wp->request;
   	
-  	if (function_exists('icl_object_id')) {
-		$languages = icl_get_languages('skip_missing=1');
-  	} else {
-	  	$languages = array();
-  	}
+  	$theme = wp_get_theme();
   	
-  	$google_languages = array(
-	  	'googtrans(en|es)' => 'Spanish',
-	  	'googtrans(en|ar)' => 'ترجمه',
-	  	'googtrans(en|zh-CN)' => 'Chinese',
-	  	'googtrans(en|fr)' => 'French',
-	  	'googtrans(en|de)' => 'German',
-	  	'googtrans(en|ko)' => 'Korean',
-	  	'googtrans(en|vi)' => 'Vietnamese'
-  	);
-  	
-	if(1 < count($languages)){
-		foreach($languages as $l) {
-			if($l['active']) {
-				$active = $l['native_name'];
-			}
-		}
-	} else {
-		if(strpos($url, "#") === false) {
-			$active = "English";
-		} else {
-			$key = explode("#", $url)[0];
-			$active = $google_languages[$key];
-		}		
-	}
-	?>
-  	<div class="translated-btn">
-		<div class="dropdown">
-			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				<i class="fa fa-comment"></i> Translate <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-			<?php if(1 < count($languages)): ?>
-				<?php foreach($languages as $l): ?>
-					<?php if(!$l['active']): ?>
-						<li><a data-lang="<?php echo $l['code']; ?>" href="<?php echo $l['url']; ?>"><?php echo $l['translated_name']; ?></a></li>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			<?php endif; ?>
+  	if ( $theme->name == 'Lincoln Elementary School' ) {
+	  	
+	  	if (function_exists('icl_object_id')) {
 			
-			<?php foreach($google_languages as $key => $val): ?>
-				<?php if ($current_url == 'https://linuspauling.csd509j.net/' || $current_url == 'https://linuspauling.csd509j.net/es/'): ?>
-					<?php if($val != 'Spanish'): ?>
+			$languages = icl_get_languages('skip_missing=1');
+		
+		}
+
+	  	?>
+	  	
+	  	<div id="language-toggle" class="bg-primary">
+		  	<div id="language-toggle-container">
+			  	
+			  	<?php if ( $languages['en']['active'] ): ?>
+			  		
+			  		<a class="btn btn-light disabled" aria-disabled="true" data-lang="<?php echo $languages['en']['code']; ?>" href="<?php echo $languages['en']['url']; ?>"><?php echo $languages['en']['translated_name']; ?></a>
+
+			  	<?php else: ?>
+				  	
+				  <a class="btn btn-primary" data-lang="<?php echo $languages['en']['code']; ?>" href="<?php echo $languages['en']['url']; ?>"><?php echo $languages['en']['translated_name']; ?></a>
+				  	
+				<?php endif; ?>	
+				
+				<?php if ( $languages['es']['active'] ): ?>
+				
+		  			<a class="btn btn-light disabled" aria-disabled="true" data-lang="<?php echo $languages['es']['code']; ?>" href="<?php echo $languages['es']['url']; ?>"><?php echo $languages['es']['translated_name']; ?></a>
+				
+				<?php else: ?>
+				
+		  			<a class="btn btn-primary" data-lang="<?php echo $languages['es']['code']; ?>" href="<?php echo $languages['es']['url']; ?>">Español</a>
+		  	
+		  		<?php endif; ?>
+		  		
+		  	</div>
+	  	</div>
+	  	
+	  	<?php
+	  	
+  	} else {
+	  	
+	  	if ( function_exists('icl_object_id') ) {
+			
+			$languages = icl_get_languages('skip_missing=1');
+	  	
+	  	} else {
+		  	
+		  	$languages = array();
+	  	
+	  	}
+	  	
+	  	$google_languages = array(
+		  	'googtrans(en|es)' => 'Spanish',
+		  	'googtrans(en|ar)' => 'ترجمه',
+		  	'googtrans(en|zh-CN)' => 'Chinese',
+		  	'googtrans(en|fr)' => 'French',
+		  	'googtrans(en|de)' => 'German',
+		  	'googtrans(en|ko)' => 'Korean',
+		  	'googtrans(en|vi)' => 'Vietnamese'
+	  	);
+	  	
+		if( 1 < count($languages) ){
+			
+			foreach( $languages as $l ) {
+				
+				if( $l['active'] ) {
+				
+					$active = $l['native_name'];
+				
+				}
+			
+			}
+		} else {
+			
+			if( strpos($url, "#") === false ) {
+				
+				$active = "English";
+			
+			} else {
+				
+				$key = explode("#", $url)[0];
+				$active = $google_languages[$key];
+			
+			}	
+		}
+		
+		?>
+	  	
+	  	<div class="translated-btn">
+			<div class="dropdown">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<i class="fa fa-comment"></i> Translate <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				<?php if(1 < count($languages)): ?>
+					<?php foreach($languages as $l): ?>
+						<?php if(!$l['active']): ?>
+							<li><a data-lang="<?php echo $l['code']; ?>" href="<?php echo $l['url']; ?>"><?php echo $l['translated_name']; ?></a></li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php endif; ?>
+				
+				<?php foreach($google_languages as $key => $val): ?>
+					<?php if ($current_url == 'https://linuspauling.csd509j.net/' || $current_url == 'https://linuspauling.csd509j.net/es/'): ?>
+						<?php if($val != 'Spanish'): ?>
+							<li><a href="<?php echo home_url(); ?>/#<?php echo $key; ?>" target="_blank"><?php echo $val; ?></a></li>
+						<?php endif; ?>
+					<?php else: ?>
 						<li><a href="<?php echo home_url(); ?>/#<?php echo $key; ?>" target="_blank"><?php echo $val; ?></a></li>
 					<?php endif; ?>
-				<?php else: ?>
-					<li><a href="<?php echo home_url(); ?>/#<?php echo $key; ?>" target="_blank"><?php echo $val; ?></a></li>
-				<?php endif; ?>
-			<?php endforeach; ?>
-			</ul>
+				<?php endforeach; ?>
+				</ul>
+			</div>
 		</div>
-	</div>
-	
-<?php
+		
+	<?php
+	}
 }
 
 /**
@@ -95,7 +154,11 @@ function languages_toggle(){
  * @since CSD Schools 1.4.5
  */
 function csd_check_default_language() {
-	if(!is_admin()) {
+	
+	$theme = wp_get_theme();
+	
+	if( !is_admin() && $theme->name == 'Linus Pauling Middle School') {
+		
 		global $sitepress;
 	    global $wp;
 	    
@@ -105,38 +168,48 @@ function csd_check_default_language() {
 	
 	    $langtemp = @$_COOKIE['csd_translation_preference'];
 		
-		if (!$langtemp && !is_page('select-language')) {
+		if ( !$langtemp && !is_page('select-language') ) {
+			
 			//Redirect 
             $referrer = home_url($_SERVER['REQUEST_URI']);
             $url = home_url('/select-language') . '?redirect=' . $referrer;
             $url = str_replace('/es/', '/', $url);
 			wp_redirect($url);        
 			exit;
-		} elseif (!is_page('select-language')) {
-		    if (in_array($langtemp, $supported_lang)) {
+			
+		} elseif ( !is_page('select-language') ) {
+		    
+		    if ( in_array($langtemp, $supported_lang) ) {
+			   
 			    // If cookie is set and contains valid value, update correct language
 				$correct_lang = $langtemp;
+			
 			}
 		
 		    if ( $current_lang != $correct_lang ) {
+			   
 			    // If current viewed language is not preferred, change to preferred.
 		    	$sitepress->switch_lang($correct_lang, true);
 		
-				if ($correct_lang == 'en') {
+				if ( $correct_lang == 'en' ) {
+					
 					// Handle when viewing spanish url with English set as preferred language.
 					$url = home_url($_SERVER['REQUEST_URI']);
 					$url = str_replace('/es/', '/', $url);
 					wp_redirect($url);
 					exit;
-				} elseif ($correct_lang == 'es') {
+				
+				} elseif ( $correct_lang == 'es' ) {
+				
 					$url = home_url($_SERVER['REQUEST_URI']);
 					$new_url = home_url() . '/es';
 					$url = str_replace(home_url(), $new_url, $url);
 					wp_redirect($url);
 					exit;
+				
 				}
 		    }
 		}
 	}
 }
-add_action('wp', 'csd_check_default_language');
+add_action( 'wp', 'csd_check_default_language' );
