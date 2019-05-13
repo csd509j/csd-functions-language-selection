@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: CSD Functions - Language Preference Selection
-Version: 1.0
+Version: 1.1
 Description: Store language preference
 Author: Josh Armentano
 Author URI: https://abidewebdesign.com
@@ -16,6 +16,77 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
+
+/**
+ * Language toggle button
+ *
+ * @since CSD Schools 1.4.5
+ */
+function languages_toggle(){
+	global $wp;
+	$current_url = home_url('/');
+	$url = $wp->request;
+  	
+  	if (function_exists('icl_object_id')) {
+		$languages = icl_get_languages('skip_missing=1');
+  	} else {
+	  	$languages = array();
+  	}
+  	
+  	$google_languages = array(
+	  	'googtrans(en|es)' => 'Spanish',
+	  	'googtrans(en|ar)' => 'ترجمه',
+	  	'googtrans(en|zh-CN)' => 'Chinese',
+	  	'googtrans(en|fr)' => 'French',
+	  	'googtrans(en|de)' => 'German',
+	  	'googtrans(en|ko)' => 'Korean',
+	  	'googtrans(en|vi)' => 'Vietnamese'
+  	);
+  	
+	if(1 < count($languages)){
+		foreach($languages as $l) {
+			if($l['active']) {
+				$active = $l['native_name'];
+			}
+		}
+	} else {
+		if(strpos($url, "#") === false) {
+			$active = "English";
+		} else {
+			$key = explode("#", $url)[0];
+			$active = $google_languages[$key];
+		}		
+	}
+	?>
+  	<div class="translated-btn">
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				<i class="fa fa-comment"></i> Translate <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<?php if(1 < count($languages)): ?>
+				<?php foreach($languages as $l): ?>
+					<?php if(!$l['active']): ?>
+						<li><a data-lang="<?php echo $l['code']; ?>" href="<?php echo $l['url']; ?>"><?php echo $l['translated_name']; ?></a></li>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			
+			<?php foreach($google_languages as $key => $val): ?>
+				<?php if ($current_url == 'https://linuspauling.csd509j.net/' || $current_url == 'https://linuspauling.csd509j.net/es/'): ?>
+					<?php if($val != 'Spanish'): ?>
+						<li><a href="<?php echo home_url(); ?>/#<?php echo $key; ?>" target="_blank"><?php echo $val; ?></a></li>
+					<?php endif; ?>
+				<?php else: ?>
+					<li><a href="<?php echo home_url(); ?>/#<?php echo $key; ?>" target="_blank"><?php echo $val; ?></a></li>
+				<?php endif; ?>
+			<?php endforeach; ?>
+			</ul>
+		</div>
+	</div>
+	
+<?php
 }
 
 /**
