@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: CSD Functions - Language Preference Selection
-Version: 1.1
+Version: 1.2
 Description: Store language preference
 Author: Josh Armentano
 Author URI: https://abidewebdesign.com
@@ -30,7 +30,7 @@ function languages_toggle() {
   	
   	$theme = wp_get_theme();
   	
-  	if ( $theme->name == 'Lincoln Elementary School' ) {
+  	if ( $theme->name == 'Lincoln Elementary School' || $theme->name == 'Garfield Elementary School'  ) {
 	  	
 	  	if (function_exists('icl_object_id')) {
 			
