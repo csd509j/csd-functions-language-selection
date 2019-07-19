@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: CSD Functions - Language Preference Selection
-Version: 1.2
+Version: 1.3
 Description: Store language preference
 Author: Josh Armentano
 Author URI: https://abidewebdesign.com
@@ -156,8 +156,9 @@ function languages_toggle() {
 function csd_check_default_language() {
 	
 	$theme = wp_get_theme();
+	$themes = array('Linus Pauling Middle School', 'Garfield Elementary School');
 	
-	if( !is_admin() && $theme->name == 'Linus Pauling Middle School') {
+	if ( !is_admin() && in_array($theme->name, $themes) ) {
 		
 		global $sitepress;
 	    global $wp;
