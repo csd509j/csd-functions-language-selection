@@ -17,7 +17,32 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+/**
+ * Bot checker
+ *
+ * @since CSD Schools 3.5.6
+ */
+function is_bot() {
+	
+	$botlist = array("Teoma", "alexa", "froogle", "Gigabot", "inktomi",
+		"looksmart", "URL_Spider_SQL", "Firefly", "NationalDirectory",
+		"Ask Jeeves", "TECNOSEEK", "InfoSeek", "WebFindBot", "girafabot",
+		"crawler", "www.galaxy.com", "Googlebot", "Scooter", "Slurp",
+		"msnbot", "appie", "FAST", "WebBug", "Spade", "ZyBorg", "rabaz",
+		"Baiduspider", "Feedfetcher-Google", "TechnoratiSnoop", "Rankivabot",
+		"Mediapartners-Google", "Sogou web spider", "WebAlta Crawler","TweetmemeBot",
+		"Butterfly","Twitturls","Me.dium","Twiceler","bot","Bot");
+	
+	foreach( $botlist as $bot ) {
+	
+		if( strpos( $_SERVER['HTTP_USER_AGENT'], $bot ) !== false ) {
+	
+			return true;
+		}
+	}
+	
+	return false;
+}
 /**
  * Language toggle button
  *
@@ -30,7 +55,7 @@ function languages_toggle() {
   	
   	$theme = wp_get_theme();
   	
-  	if ( $theme->name == 'Lincoln Elementary School' || $theme->name == 'Garfield Elementary School'  ) {
+  	if ( $theme->name == 'Lincoln Elementary School' || $theme->name == 'Garfield Elementary School' && !isBot() ) {
 	  	
 	  	if (function_exists('icl_object_id')) {
 			
