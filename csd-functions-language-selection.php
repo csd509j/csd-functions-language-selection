@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: CSD Functions - Language Preference Selection
-Version: 1.4
+Version: 1.5
 Description: Store language preference
 Author: Josh Armentano
 Author URI: https://abidewebdesign.com
@@ -145,7 +145,7 @@ function languages_toggle() {
 	  	<div class="translated-btn">
 			<div class="dropdown">
 				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					<i class="fa fa-comment"></i> Translate <span class="caret"></span>
+					<i class="fa fa-comment d-none d-sm-inline-block"></i> Translate <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				<?php if(1 < count($languages)): ?>
